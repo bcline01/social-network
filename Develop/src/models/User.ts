@@ -1,70 +1,57 @@
-import { Schema, Types, model, type Document } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 // user for controller
 
-interface IAssignment extends Document {
-    assignmentId: Schema.Types.ObjectId,
-    name: string,
-    score: number
-}
+interface IUser extends Document {
+    username: string;
+    email: string;
+    thoughts: Schema.Types.ObjectId[];
+    friends: Schema.Types.ObjectId[];
+    friendCount: number; // Virtual property for friend count
+  }
 
-interface IStudent extends Document {
-    first: string,
-    last: string,
-    github: string,
-    assignments: Schema.Types.ObjectId[]
-}
 
-const assignmentSchema = new Schema<IAssignment>(
+
+  const userSchema = new Schema<IUser>(
     {
-        assignmentId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
+      username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
+      },
+      thoughts: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Thought',
         },
-        name: {
-            type: String,
-            required: true,
-            maxlength: 50,
-            minlength: 4,
-            default: 'Unnamed assignment',
+      ],
+      friends: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
         },
-        score: {
-            type: Number,
-            required: true,
-            default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
-        },
+      ],
     },
     {
-        timestamps: true,
-        _id: false
+      toJSON: {
+        virtuals: true,
+      },
+      id: false,
     }
-);
+  );
 
-const studentSchema = new Schema<IStudent>({
-    first: {
-        type: String,
-        required: true,
-        max_length: 50,
-    },
-    last: {
-        type: String,
-        required: true,
-        max_length: 50,
-    },
-    github: {
-        type: String,
-        required: true,
-        max_length: 50,
-    },
-    assignments: [assignmentSchema],
-},
-    {
-        toJSON: {
-            getters: true,
-        },
-        timestamps: true
-    }
-);
+  // Virtual property to get the friend count
+userSchema.virtual('friendCount').get(function (this: IUser) {
+    return this.friends.length;
+  });
 
-const User = model('User', studentSchema);
+// Create the User model using the IUser interface and schema
+const User = model<IUser>('User', userSchema);
 
 export default User;
