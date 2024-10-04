@@ -1,49 +1,56 @@
 import db from '../config/connection.js';
-import { Course, Student } from '../models/index.js';
+import { User, Thought } from '../models/index.js';
 import cleanDB from './cleanDB.js';
-import { getRandomName, getRandomAssignments } from './data.js';
+import { getRandomName } from './data.js';
 
 try {
+  // Connect to the database and clean up previous entries
   await db();
   await cleanDB();
 
-  // Create empty array to hold the students
-  const students = [];
+  // Create empty arrays to hold users and thoughts
+  const users = [];
+  const thoughts = [];
 
-  // Loop 20 times -- add students to the students array
+  // Loop 20 times -- generate users and thoughts
   for (let i = 0; i < 20; i++) {
-    // Get some random assignment objects using a helper function that we imported from ./data
-    const assignments = getRandomAssignments(20);
-
+    // Generate random name
     const fullName = getRandomName();
     const first = fullName.split(' ')[0];
     const last = fullName.split(' ')[1];
-    const github = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
 
-    students.push({
-      first,
-      last,
-      github,
-      assignments,
+    // Generate random username and email
+    const username = `${first.toLowerCase()}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
+    const email = `${first.toLowerCase()}.${last.toLowerCase()}@example.com`;
+
+    // Create a random thought for each user
+    const thoughtText = `This is a thought by ${username}`;
+    const thought = new Thought({ thoughtText, username });
+
+    // Push thought to thoughts array
+    thoughts.push(thought);
+
+    // Push the generated user data into the users array, referencing the created thought
+    users.push({
+      username,
+      email,
+      thoughts: [thought._id], 
+      friends: [], 
     });
   }
 
-  // Add students to the collection and await the results
-  const studentData = await Student.create(students);
+  // Insert thoughts into the Thought collection
+  await Thought.insertMany(thoughts);
 
-  // Add courses to the collection and await the results
-  await Course.create({
-    name: 'UCLA',
-    inPerson: false,
-    students: [...studentData.map(({ _id }: { [key: string]: any }) => _id)],
-  });
+  // Insert users into the User collection
+  const userData = await User.create(users);
 
   // Log out the seed data to indicate what should appear in the database
-  console.table(students);
+  console.table(userData);
+  console.table(thoughts);
   console.info('Seeding complete! 🌱');
   process.exit(0);
 } catch (error) {
   console.error('Error seeding database:', error);
   process.exit(1);
 }
-
