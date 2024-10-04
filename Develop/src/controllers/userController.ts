@@ -117,7 +117,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   };
 
 /**
- * DELETE Student based on id /students/:id
+ * DELETE friend based on id /friend/:id
  * @param string id
  * @returns string 
 */
@@ -139,7 +139,7 @@ export const deleteFriend = async (req: Request, res: Response) => {
             });
         }
 
-        return res.json({ message: 'Student successfully deleted' });
+        return res.json({ message: 'Friend successfully deleted' });
     } catch (err) {
         console.log(err);
         return res.status(500).json(err);
