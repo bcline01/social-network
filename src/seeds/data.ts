@@ -74,26 +74,28 @@ const names = [
   'Parker',
 ];
 
-// const appDescriptions = [
-//   'Decision Tracker',
-//   'Find My Phone',
-//   'Learn Piano',
-//   'Starbase Defender',
-//   'Tower Defense',
-//   'Monopoly Money Manager',
-//   'Movie trailers',
-//   'Hello world',
-//   'Stupid Social Media App',
-//   'Notes',
-//   'Messages',
-//   'Email',
-//   'Compass',
-//   'Firefox',
-//   'Running app',
-//   'Cooking app',
-//   'Poker',
-//   'Deliveries',
-// ];
+const thoughts = [
+  "The sun sets, and I feel at peace",
+  "A cup of coffee makes everything better.",
+"Change is the only constant.",
+"Just breathe, everything will be fine.",
+"Every day is a fresh start.",
+"Small steps lead to big changes.",
+"Gratitude turns what we have into enough.",
+"Life is about balance.",
+"Inhale confidence, exhale doubt.",
+"Time flies, but memories last forever.",
+"Dream big, start small.",
+"Kindness is always a choice.",
+"Challenges are opportunities in disguise.",
+"Happiness is found in little moments.",
+"Take it one day at a time.",
+"Adventure is out there, go find it.",
+"Everything happens for a reason.",
+"Focus on the good, let go of the bad.",
+"Patience is the key to success.",
+"Be the reason someone smiles today.",
+];
 
 // Get a random item given an array
 export const getRandomArrItem = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
@@ -102,4 +104,6 @@ export const getRandomArrItem = (arr: any) => arr[Math.floor(Math.random() * arr
 export const getRandomName =() =>
   `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
 
+export const getRandomThought = () =>
+  `${getRandomArrItem(thoughts)}`;
 

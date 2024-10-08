@@ -1,7 +1,7 @@
 import db from '../config/connection.js';
 import { User, Thought } from '../models/index.js';
 import cleanDB from './cleanDB.js';
-import { getRandomName } from './data.js';
+import { getRandomName, getRandomThought } from './data.js';
 
 try {
   // Connect to the database and clean up previous entries
@@ -24,7 +24,7 @@ try {
     const email = `${first.toLowerCase()}.${last.toLowerCase()}@example.com`;
 
     // Create a random thought for each user
-    const thoughtText = `This is a thought by ${username}`;
+    const thoughtText = getRandomThought();
     const thought = new Thought({ thoughtText, username });
 
     // Push thought to thoughts array
