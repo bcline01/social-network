@@ -97,28 +97,7 @@ const thoughts = [
 "Be the reason someone smiles today.",
 ];
 
-// const friends = [
-//   "John Doe",
-// "Jane Smith",
-// "Alex Brown",
-// "Emily Davis",
-// "Chris Johnson",
-// "Sarah Wilson",
-// "Michael Lee",
-// "Laura Green",
-// "Daniel Clark",
-// "Jessica Miller",
-// "David Young",
-// "Olivia Harris",
-// "Ethan Martinez",
-// "Sophia Anderson",
-// "Noah King",
-// "Lily Thompson",
-// "James White",
-// "Mia Turner",
-// "Henry Walker",
-// "Ava Hall",
-// ];
+
 
 const reactions = [
   "Great thought!",
@@ -152,8 +131,6 @@ export const getRandomName =() =>
 export const getRandomThought = () =>
   `${getRandomArrItem(thoughts)}`;
 
-// export const getRandomFriend = () =>
-//   `${getRandomArrItem(friends)}`;
 
 export const getRandomReaction = () =>
   `${getRandomArrItem(reactions)}`;
