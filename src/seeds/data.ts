@@ -97,6 +97,51 @@ const thoughts = [
 "Be the reason someone smiles today.",
 ];
 
+// const friends = [
+//   "John Doe",
+// "Jane Smith",
+// "Alex Brown",
+// "Emily Davis",
+// "Chris Johnson",
+// "Sarah Wilson",
+// "Michael Lee",
+// "Laura Green",
+// "Daniel Clark",
+// "Jessica Miller",
+// "David Young",
+// "Olivia Harris",
+// "Ethan Martinez",
+// "Sophia Anderson",
+// "Noah King",
+// "Lily Thompson",
+// "James White",
+// "Mia Turner",
+// "Henry Walker",
+// "Ava Hall",
+// ];
+
+const reactions = [
+  "Great thought!",
+"I totally agree.",
+"Well said!",
+"That's interesting.",
+"Nice perspective!",
+"I hadnt thought of it that way.",
+"Good point.",
+"I love this!",
+"Very insightful.",
+"This made my day.",
+"Absolutely!",
+"Couldn't agree more.",
+"Wow, so true.",
+"This is brilliant.",
+"Such a great idea.",
+"I'm inspired!",
+"So relatable!",
+"Well written.",
+"This made me think.",
+"Incredible!",
+];
 // Get a random item given an array
 export const getRandomArrItem = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -106,4 +151,10 @@ export const getRandomName =() =>
 
 export const getRandomThought = () =>
   `${getRandomArrItem(thoughts)}`;
+
+// export const getRandomFriend = () =>
+//   `${getRandomArrItem(friends)}`;
+
+export const getRandomReaction = () =>
+  `${getRandomArrItem(reactions)}`;
 
