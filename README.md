@@ -1,4 +1,4 @@
-# 17 NoSQL: Social Network API ![MIT](https://img.shields.io/badge/license-MIT-green)
+# Social Network API ![MIT](https://img.shields.io/badge/license-MIT-green)
 
 
 ## Description
